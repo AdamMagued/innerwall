@@ -317,7 +317,7 @@ func TestBackoffIsBoundedWithFullJitter(t *testing.T) {
 	rng := rand.New(rand.NewPCG(3, 4)) //nolint:gosec // test
 	base, limit := time.Second, time.Minute
 	for attempt := 1; attempt <= 12; attempt++ {
-		ceiling := min(base<<uint(attempt), limit)
+		ceiling := min(base<<uint(attempt), limit) //nolint:gosec // small
 		sawSpread := false
 		var first time.Duration
 		for i := range 200 {

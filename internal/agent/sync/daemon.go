@@ -129,7 +129,7 @@ func DialGRPC(_ context.Context, server string, holder *credential.Holder) (inne
 // so that a control-plane restart produces a smooth trickle of handshakes
 // rather than a synchronized wave (ADR-0002).
 func Backoff(attempt int, base, limit time.Duration, rng *rand.Rand) time.Duration {
-	ceiling := base << uint(min(attempt, 20))
+	ceiling := base << uint(min(attempt, 20)) //nolint:gosec // bounded
 	if ceiling > limit || ceiling <= 0 {
 		ceiling = limit
 	}
